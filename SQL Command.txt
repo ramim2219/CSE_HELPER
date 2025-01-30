@@ -1,0 +1,75 @@
+CREATE DATABASE problemsDB;
+USE problemsDB;
+
+CREATE TABLE problems (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    Name VARCHAR(255),
+    Link VARCHAR(255),
+    Type VARCHAR(100),
+    TopicName VARCHAR(255)
+);
+ALTER TABLE problems ADD COLUMN Explanation VARCHAR(255) NULL, ADD COLUMN Code TEXT NULL, ADD COLUMN Video_link VARCHAR(255) NULL;
+
+CREATE TABLE concepts (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  topic VARCHAR(255) NOT NULL,
+  explanationEnglish TEXT,
+  explanationBangla TEXT,
+  code TEXT,
+  input TEXT,
+  output TEXT
+);
+ALTER TABLE concepts
+ADD COLUMN subTopic VARCHAR(255);
+
+CREATE TABLE resources (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    link TEXT NOT NULL,
+    topic VARCHAR(255) NOT NULL
+);
+
+
+CREATE TABLE Courses (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    description TEXT
+);
+
+CREATE TABLE Chapters (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    course_id INT NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    FOREIGN KEY (course_id) REFERENCES Courses(id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+
+CREATE TABLE Topics (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    chapter_id INT NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    FOREIGN KEY (chapter_id) REFERENCES Chapters(id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+
+CREATE TABLE Content (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    topic_id INT NOT NULL,
+    exercise TEXT,
+    solution TEXT,
+    image_url VARCHAR(255),
+    FOREIGN KEY (topic_id) REFERENCES Topics(id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+ALTER TABLE Topics
+ADD COLUMN explanation TEXT;
+
+
+ALTER TABLE image_table RENAME TO Contents;
+ALTER TABLE Contents ADD COLUMN exercise TEXT, ADD COLUMN solution TEXT;
+ALTER TABLE contents ADD COLUMN topic_id INT NOT NULL, ADD CONSTRAINT fk_topic_id FOREIGN KEY (topic_id) REFERENCES Topics(id) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE courses CHANGE name title VARCHAR(255);
