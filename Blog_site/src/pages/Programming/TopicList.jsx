@@ -23,6 +23,7 @@ const TopicList = () => {
                 <Problem TopicName="General Medium" />
                 <Problem TopicName="Binary Search" />
                 <Problem TopicName="Prefix Sum" />
+                <Problem TopicName="Two Pointers" />
             </div>
 
             {/* Expert Problems Section */}
