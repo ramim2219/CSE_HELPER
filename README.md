@@ -3,10 +3,10 @@
 ## Screenshots
 
 ### Home Page
-![Home](Home.png)
+![Home](home.png)
 
 ### Topic List
-![Topic List](TopicList.png)
+![Topic List](topicList.png)
 
 ### Course Page
-![Course](Course.png)
+![Course](course.png)
